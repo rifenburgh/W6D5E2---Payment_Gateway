@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+var express              = require('express');
+var router               = express.Router();
+// const keyPublishable     = process.env.PUBLISHABLE_KEY;
+// const keySecret          = process.env.SECRET_KEY;
+
+
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', (req, res, next) => {
+  res.render('index.ejs', {
+    keyPublishable: process.env.PUBLISHABLE_KEY
+    // keyPublishable: keyPublishable
+  });
 });
 
+router.get('/payinvoice', (req, res, next) => {
+  res.render('payinvoice.ejs');
+});
 module.exports = router;
