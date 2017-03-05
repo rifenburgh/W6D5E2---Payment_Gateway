@@ -1,0 +1,26 @@
+<h2>Signup</h2>
+
+<form action="/login" method="post" id="form-container">
+  <div>
+    <label for="username"></label>
+    <input id="username" type="text" name="username" placeholder="Username">
+  </div>
+
+  <div>
+    <label for="password"></label>
+    <input id="password" type="password" name="password" placeholder="Password">
+  </div>
+
+  <% if (typeof message !== "undefined") { %>
+    <div class="error-message"><%= message %></div>
+  <% } %>
+
+  <button>Create account</button>
+
+  <p class="account-message">
+    Do you already have an account?
+    <a href="/login">Login</a>
+  </p>
+
+  <a href="/auth/google"> Login With Google </a>
+</form>

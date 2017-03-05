@@ -1,24 +1,14 @@
-<h2>Signup</h2>
+<h2>Login</h2>
 
-<form action="/signup" method="post" id="form-container">
+<form action="/login" method="post" id="form-container">
   <div>
-    <label for="firstName">First Name</label>
-    <input id="firstName" type="text" name="firstName" placeholder="Jon">
+    <label for="username"></label>
+    <input id="username" type="text" name="username" placeholder="Username">
   </div>
 
   <div>
-    <label for="lastName">Last Name</label>
-    <input id="lastName" type="text" name="lastName" placeholder="Snow">
-  </div>
-
-  <div>
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username" placeholder="JonSnow">
-  </div>
-
-  <div>
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" placeholder="Your password">
+    <label for="password"></label>
+    <input id="password" type="password" name="password" placeholder="Password">
   </div>
 
   <% if (typeof message !== "undefined") { %>
@@ -32,6 +22,5 @@
     <a href="/login">Login</a>
   </p>
 
-  <a href="/auth/facebook"> Login With Facebook </a>
   <a href="/auth/google"> Login With Google </a>
 </form>

@@ -2,6 +2,7 @@ const express           = require('express');
 const adminRoutes       = express.Router();
 const Admin             = require('../models/admin-model.js');
 const bcrypt            = require('bcrypt');
+const passport          = require('passport');
 
 adminRoutes.get('/admin', (req, res, next) => {
   res.render('admin/index.ejs');
@@ -37,5 +38,19 @@ adminRoutes.post('/signup', (req, res, next) => {
 adminRoutes.get('/login', (req, res, next) => {
   res.render('admin/login.ejs');
 });
+adminRoutes.post('/login', passport.authenticate('local', {
+  successReturnToOrRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true,
+  successFlash: 'You have successfully logged in.',
+  passReqToCallback: true
+  })
+);
+adminRoutes.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success', 'You have successfully logged out.');
+  res.redirect('/admin');
+});
+
 
 module.exports          = adminRoutes;
