@@ -5,6 +5,7 @@ const studentSchema     = new Schema({
   password:               String,
   email:                  String,
   cohort:                 String,
+  program:                String,
   balanceDue:             Number,
   transactionHistory:     Array
 });

@@ -26,11 +26,12 @@ const LocalStrategy     = require('passport-local').Strategy;
 const GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
 const session           = require('express-session');
 const bcrypt            = require('bcrypt');
+const flash             = require('connect-flash');
 // const User              = require('./models/user.js');
 const Student           = require('./models/student-model.js');
 const Admin             = require('./models/admin-model.js');
 const stripe            = require('stripe')(keySecret);
-const flash             = require('connect-flash');
+// const flash             = require('connect-flash');
 
 // var users = require('./routes/users');
 
