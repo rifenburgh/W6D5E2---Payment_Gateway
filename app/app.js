@@ -76,7 +76,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new LocalStrategy((username, password, next) => {
-  User.findOne({ username }, (err, user) => {
+  Admin.findOne({ username }, (err, user) => {
     if (err) {
       next(err);
     } else if (!user) {
@@ -88,30 +88,34 @@ passport.use(new LocalStrategy((username, password, next) => {
     }
   });
 }));
-// passport.use(new GoogleStrategy({
-//   clientID: process.env.GOOGLE_CLIENT_ID,
-//   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//   callbackURL: process.env.HOST_ADDRESS + '/auth/google/callback'
-// }, (accessToken, refreshToken, profile, next) => {
-//   next(null, profile);
-// }));
+passport.use(new GoogleStrategy({
+  clientID: process.env.KEY_GOOGLE_PUBLIC,
+  clientSecret: process.env.KEY_GOOGLE_SECRET,
+  callbackURL: process.env.HOST_ADDRESS + '/auth/google/callback'
+}, (accessToken, refreshToken, profile, next) => {
+  next(null, profile);
+}));
+
 passport.serializeUser((user, cb) => {
-  if(user.provider) {
+  if (user.provider) {
     cb(null, user);
   } else {
-    cb(null, null._id);
+    cb(null, user._id);
   }
 });
+
 passport.deserializeUser((id, cb) => {
-  if(id.provider) {
+  if (id.provider) {
     cb(null, id);
     return;
   }
-    User.findOne({ '_id': id }, (err, user) => {
-      if(err) {return cb(err); }
-      cb(null, user);
-    });
+
+  User.findOne({ "_id": id }, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
 });
+
 
 
 //START Routes

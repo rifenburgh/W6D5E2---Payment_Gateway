@@ -4,6 +4,7 @@ const Admin             = require('../models/admin-model.js');
 const Student           = require('../models/student-model.js');
 const bcrypt            = require('bcrypt');
 const passport          = require('passport');
+const mongoose          = require('mongoose');
 
 adminRoutes.get('/admin', (req, res, next) => {
   res.render('admin/index.ejs');
@@ -83,5 +84,24 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
     res.redirect('/admin');
   });
 });
+adminRoutes.get('/outstandingbalance', (req, res, next) => {
+  const studentMap        = [];
+  //Query all of the students with an open Tuition Balance and display their information on the screen
+  //Include a button to send a payment reminder
+
+        Student.findOne({}, (err, items) => {
+          console.log(items);
+          const i = 0;
+        });
+        items.forEach((item) => {
+          console.lot(item);
+        });
+
+  console.log(studentMap);
+  res.render('admin/outstandingbalance.ejs', {
+    studentMap:               studentMap
+  });
+});
+
 
 module.exports          = adminRoutes;
