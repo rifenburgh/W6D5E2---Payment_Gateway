@@ -30,7 +30,6 @@ const flash             = require('connect-flash');
 // const User              = require('./models/user.js');
 const Student           = require('./models/student-model.js');
 const Admin             = require('./models/admin-model.js');
-const stripe            = require('stripe')(keySecret);
 // const flash             = require('connect-flash');
 
 // var users = require('./routes/users');
@@ -42,7 +41,8 @@ const stripe            = require('stripe')(keySecret);
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 const app               = express();
-const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_EMAILVALIDATION, domain: process.env.MAILGUN_DOMAIN});
+const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_ACTIVE, domain: process.env.MAILGUN_DOMAIN});
+const stripe            = require('stripe')(process.env.SECRET_KEY);
 
 
 

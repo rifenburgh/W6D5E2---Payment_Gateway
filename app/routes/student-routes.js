@@ -23,6 +23,26 @@ studentRoutes.get('/payinvoice/:id', (req, res, next) => {
 studentRoutes.post('/payinvoice/:id', (req, res, next) => {
 
 });
+studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
+  const id              = req.params.id;
+
+  Student.findOne({ _id: id }, (err, item) => {
+    if(err) {
+      next(err);
+      return;
+    }
+    const firstname     = item.firstname;
+    const lastname      = item.lastname;
+    console.log(item);
+    console.log(typeof item);
+    res.render('admin/updatestudent.ejs', {
+      item:               item,
+      firstname:          firstname,
+      lastname:           lastname,
+      email:              item.email
+    });
+  });
+});
 studentRoutes.get('/payinvoice/:id/delete', (req, res, next) => {
   const id              = req.params.id;
   Student.findByIdAndRemove(id, (err, item) => {

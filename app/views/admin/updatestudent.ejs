@@ -1,0 +1,37 @@
+<h2>Update Student Page</h2>
+<%= item.firstname %>
+<%= email %>
+
+<form class="createinvoice" action="/updatestudent" method="post">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <br>
+    <input id="firstname" type="text" name="firstname" placeholder=<%= firstname %>>
+    <br>
+    <input id="lastname" type="text" name="lastname" placeholder="Update Lastname">
+    <br>
+    <input id="email" type="text" name="email" placeholder="Update Email">
+    <br>
+    <input id="cohort" type="text" name="cohort" placeholder="Update Cohort">
+    <br>
+    <input id="program" type="text" name="program" placeholder="Update Program">
+    <br>
+    <input id="city" type="text" name="city" placeholder="Update City">
+    <br>
+    <input id="balanceDue" type="text" name="balanceDue" placeholder="Update Balance">
+    <p>
+      <button type=submit class="btn btn-primary">Update Student</button>
+    </p>
+  </div>
+  <div class="col-md-4">
+  </div>
+
+</form>
+<%= item.firstname %>
+<%= item.lastname %>
+<%= item.email %>
+<%= item.cohort %>
+<%= item.program %>
+<%= item.city %>
+<%= item.balanceDue %>

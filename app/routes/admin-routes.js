@@ -5,8 +5,7 @@ const Student           = require('../models/student-model.js');
 const bcrypt            = require('bcrypt');
 const passport          = require('passport');
 const mongoose          = require('mongoose');
-const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_EMAILVALIDATION, domain: process.env.MAILGUN_DOMAIN});
-
+const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_ACTIVE, domain: process.env.MAILGUN_DOMAIN});
 
 adminRoutes.get('/admin', (req, res, next) => {
   res.render('admin/index.ejs');
@@ -62,7 +61,7 @@ adminRoutes.get('/createinvoice', (req, res, next) => {
   res.render('admin/createinvoice.ejs');
 });
 adminRoutes.post('/createinvoice', (req, res, next) => {
-  const firstname          = req.body.firstname;
+  const firstname         = req.body.firstname;
   const lastname          = req.body.lastname;
   const email             = req.body.email;
   const cohort            = req.body.cohort;
@@ -87,10 +86,9 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
       return;
     }
     //EMail Notification on Invoice Creation
-    var mailgun           = new Mailgun();
     var emailUpdate = {
-      from: 'Excited User <Blah@Example.com>',
-      to: 'Blah@Example.com',
+      from: `Robot <${process.env.EMAIL_SPAM}>`,
+      to: email,
       subject: 'Invoice Created',
       text: 'Testing some Mailgun awesomness!'
     };
@@ -101,6 +99,37 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
     res.redirect('/admin');
   });
 });
+adminRoutes.post('/updatestudent', (req, res, next) => {
+  const firstname         = req.body.firstname;
+  const lastname          = req.body.lastname;
+  const email             = req.body.email;
+  const cohort            = req.body.cohort;
+  const program           = req.body.program;
+  const city              = req.body.city;
+  const balanceDue        = req.body.balanceDue;
+  studentInfo             = {
+    firstname:              firstname,
+    lastname:               lastname,
+    email:                  email,
+    cohort:                 cohort,
+    program:                program,
+    city:                   city,
+    balanceDue:             balanceDue
+  };
+  const newStudent        = new Student(studentInfo);
+  newStudent.save((err) => {
+    if(err) {
+      res.render('admin/createinvoice.ejs', {
+        errorMessage: 'Unable to Create Student.'
+      });
+      return;
+    }
+  });
+});
+
+
+
+
 adminRoutes.get('/outstandingbalance', (req, res, next) => {
   //Query all of the students with an open Tuition Balance and display their information on the screen
   //Include a button to send a payment reminder
