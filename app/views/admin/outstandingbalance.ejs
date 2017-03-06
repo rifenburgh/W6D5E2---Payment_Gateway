@@ -1,5 +1,33 @@
 <h2>Outstanding Balance</h2>
 
-<% //studentMap.forEach((item) => { %>
-<%= //item.email  %>
-<% //}); %>
+
+<table border="1">
+  <tr>
+    <td>Firstname</td>
+    <td>Lastname</td>
+    <td>Email</td>
+    <td>Cohort</td>
+    <td>Program</td>
+    <td>City</td>
+    <td>Balance Due</td>
+    <td>Transaction History</td>
+    <td></td>
+    <td></td>
+  </tr>
+<% items.forEach((item) => { %>
+  <tr>
+    <td><a href="/payinvoice/<%= item._id %>"><%= item.firstname %></a></td>
+    <td><%= item.lastname %></td>
+    <td><%= item.email %></td>
+    <td><%= item.cohort %></td>
+    <td><%= item.program %></td>
+    <td><%= item.city %></td>
+    <td>$<%= item.balanceDue %></td>
+    <td><%= item.transactionHistory[0] %></td>
+    <td><a href="/payinvoice/<%= item._id %>/delete"><button class="btn btn-danger">Delete</button></a></td>
+    <td><a href="#"><button class="btn btn-primary">Send Reminder</button></a></td>
+  </tr>
+<% }); %>
+</table>
+
+<%= //items %>

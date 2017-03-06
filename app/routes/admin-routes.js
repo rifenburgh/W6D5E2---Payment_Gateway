@@ -60,18 +60,20 @@ adminRoutes.get('/createinvoice', (req, res, next) => {
   res.render('admin/createinvoice.ejs');
 });
 adminRoutes.post('/createinvoice', (req, res, next) => {
-  const username          = req.body.username;
-  const password          = req.body.password;
+  const firstname          = req.body.firstname;
+  const lastname          = req.body.lastname;
   const email             = req.body.email;
   const cohort            = req.body.cohort;
   const program           = req.body.program;
+  const city              = req.body.city;
   const balanceDue        = req.body.balanceDue;
   studentInfo             = {
-    username:               username,
-    password:               password,
+    firstname:              firstname,
+    lastname:               lastname,
     email:                  email,
     cohort:                 cohort,
     program:                program,
+    city:                   city,
     balanceDue:             balanceDue
   };
   const newStudent        = new Student(studentInfo);
@@ -86,9 +88,21 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
   });
 });
 adminRoutes.get('/outstandingbalance', (req, res, next) => {
-  const studentMap        = [];
   //Query all of the students with an open Tuition Balance and display their information on the screen
   //Include a button to send a payment reminder
+  var studentMaps         = Student.find({}).exec();
+  console.log(studentMaps);
+
+  Student.find({}, function(err, items){
+        if(err){
+          console.log(err);
+        } else{
+            console.log(items);
+            res.render('admin/outstandingbalance.ejs', {
+              items:       items
+            });
+        }
+    });
         /*
         Student.findOne({}, (err, items) => {
           console.log(items);
@@ -98,10 +112,6 @@ adminRoutes.get('/outstandingbalance', (req, res, next) => {
           console.lot(item);
         });
         */
-  console.log(studentMap);
-  res.render('admin/outstandingbalance.ejs', {
-    studentMap:               studentMap
-  });
 });
 
 

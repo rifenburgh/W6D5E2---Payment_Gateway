@@ -32,3 +32,8 @@ video {
 .tempNav {
   float: right;
 }
+table {
+  border: 1px solid black;
+  padding-right: 10px;
+  text-align: center;
+}

@@ -6,22 +6,31 @@ const keyPublishable    = process.env.PUBLISHABLE_KEY;
 
 //include the /:ID variable in routes as soon as it is available
 //Static ID exists is 2nd item in MongoDB.W6D5E2.students
-studentRoutes.get('/payinvoice', (req, res, next) => {
-  Student.findOne({name: '58bc4afe0bbf3f4b3c5a17e3'}, (err, items) => {
-    // const email         = items.email;
-  });
-  res.render('student/payinvoice.ejs',{
-    // items:                items
-    // email:                email,
-    // balanceDue:           balanceDue,
-    // cohort:               cohort,
-    // program:              program,
-    // keyPublishable:       keyPublishable
+studentRoutes.get('/payinvoice/:id', (req, res, next) => {
+  const id              = req.params.id;
+  Student.findById(id, (err, item) => {
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('student/payinvoice.ejs',{
+      item:               item
+    });
   });
 });
+
 //Process successful payment and deduct from balanceDue
 studentRoutes.post('/payinvoice/:id', (req, res, next) => {
 
 });
-
+studentRoutes.get('/payinvoice/:id/delete', (req, res, next) => {
+  const id              = req.params.id;
+  Student.findByIdAndRemove(id, (err, item) => {
+    if(err) {
+      next(err);
+      return;
+    }
+    res.redirect('/outstandingbalance');
+  });
+});
 module.exports = studentRoutes;

@@ -1,11 +1,12 @@
 const mongoose          = require('mongoose');
 const Schema            = mongoose.Schema;
 const studentSchema     = new Schema({
-  username:               String,
-  password:               String,
+  firstname:              String,
+  lastname:               String,
   email:                  String,
   cohort:                 String,
   program:                String,
+  city:                   String,
   balanceDue:             Number,
   transactionHistory:     Array
 });
