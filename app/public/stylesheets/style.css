@@ -44,3 +44,6 @@ a {
   position: absolute;
   margin-top: 50%;
 }
+td {
+  text-align: left;
+}
