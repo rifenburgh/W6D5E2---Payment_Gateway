@@ -32,7 +32,7 @@ adminRoutes.post('/signup', (req, res, next) => {
         res.render('admin/signup.ejs', {message: 'There was an error.' });
       } else {
         req.flash('success', 'You have successfully registered.');
-        res.redirect('/login');
+        res.redirect('/admin');
       }
     });
   });
@@ -43,12 +43,13 @@ adminRoutes.get('/login', (req, res, next) => {
   });
 });
 adminRoutes.post('/login', passport.authenticate('local', {
-  successReturnToOrRedirect: '/',
+  successReturnToOrRedirect: '/admin',
   failureRedirect: '/login',
   failureFlash: true,
   successFlash: 'You have successfully logged in.',
   passReqToCallback: true
   })
+
 );
 adminRoutes.get('/logout', (req, res) => {
   req.logout();
@@ -88,7 +89,7 @@ adminRoutes.get('/outstandingbalance', (req, res, next) => {
   const studentMap        = [];
   //Query all of the students with an open Tuition Balance and display their information on the screen
   //Include a button to send a payment reminder
-
+        /*
         Student.findOne({}, (err, items) => {
           console.log(items);
           const i = 0;
@@ -96,7 +97,7 @@ adminRoutes.get('/outstandingbalance', (req, res, next) => {
         items.forEach((item) => {
           console.lot(item);
         });
-
+        */
   console.log(studentMap);
   res.render('admin/outstandingbalance.ejs', {
     studentMap:               studentMap

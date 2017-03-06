@@ -13,7 +13,4 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.get('/payinvoice', (req, res, next) => {
-  res.render('payinvoice.ejs');
-});
 module.exports = router;
