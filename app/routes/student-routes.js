@@ -13,8 +13,11 @@ studentRoutes.get('/payinvoice/:id', (req, res, next) => {
       next(err);
       return;
     }
+    const balanceDue    = (item.balanceDue * 100);
     res.render('student/payinvoice.ejs',{
-      item:               item
+      item:               item,
+      balanceDue:         balanceDue,
+      keyPublishable:     keyPublishable
     });
   });
 });
