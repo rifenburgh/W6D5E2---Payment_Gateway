@@ -17,6 +17,7 @@
     "express-ejs-layouts": "^2.2.0",
     "express-session": "^1.15.1",
     "jade": "~1.11.0",
+    "mailgun-js": "^0.8.2",
     "mongoose": "^4.8.5",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",

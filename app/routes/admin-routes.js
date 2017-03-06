@@ -5,6 +5,8 @@ const Student           = require('../models/student-model.js');
 const bcrypt            = require('bcrypt');
 const passport          = require('passport');
 const mongoose          = require('mongoose');
+const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_EMAILVALIDATION, domain: process.env.MAILGUN_DOMAIN});
+
 
 adminRoutes.get('/admin', (req, res, next) => {
   res.render('admin/index.ejs');
@@ -84,6 +86,18 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
       });
       return;
     }
+    //EMail Notification on Invoice Creation
+    var mailgun           = new Mailgun();
+    var emailUpdate = {
+      from: 'Excited User <Blah@Example.com>',
+      to: 'Blah@Example.com',
+      subject: 'Invoice Created',
+      text: 'Testing some Mailgun awesomness!'
+    };
+    mailgun.messages().send(emailUpdate, function (error, body) {
+      console.log(body);
+    });
+    //Redirect to the Admin Home page
     res.redirect('/admin');
   });
 });

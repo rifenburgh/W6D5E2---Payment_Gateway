@@ -42,6 +42,7 @@ const stripe            = require('stripe')(keySecret);
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 const app               = express();
+const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_EMAILVALIDATION, domain: process.env.MAILGUN_DOMAIN});
 
 
 
