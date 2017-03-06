@@ -6,3 +6,29 @@ body {
 a {
   color: #00B7FF;
 }
+#bgvid {
+
+}
+video {
+    position: absolute;
+    margin-top: -50px;
+    margin-left: -50px;
+
+    opacity: 0.4;
+    /*top: 50%;
+    left: 50%;*/
+    /*min-width: 100%;
+    min-height: 100%;*/
+    width: 110%;
+    height: auto;
+    z-index: -200;
+}
+.logo {
+  position: fixed;
+  margin-left: 5%;
+  margin-top: -50px;
+  z-index: -100;
+}
+.tempNav {
+  float: right;
+}
