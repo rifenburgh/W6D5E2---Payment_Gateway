@@ -27,7 +27,7 @@
     <td><%= item.transactionHistory[0] %></td>
     <td><a href="/payinvoice/<%= item._id %>/update"><button class="btn btn-info">Update</button></a></td>
     <td><a href="/payinvoice/<%= item._id %>/delete"><button class="btn btn-danger">Delete</button></a></td>
-    <td><a href="#"><button class="btn btn-primary">Send Reminder</button></a></td>
+    <td><a href="sendemail/<%= item._id %>"><button class="btn btn-primary">Send Reminder</button></a></td>
   </tr>
 <% }); %>
 </table>

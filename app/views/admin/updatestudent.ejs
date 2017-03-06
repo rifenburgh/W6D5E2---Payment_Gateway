@@ -1,25 +1,24 @@
 <h2>Update Student Page</h2>
-<%= item.firstname %>
-<%= email %>
+
 
 <form class="createinvoice" action="/updatestudent" method="post">
   <div class="col-md-4">
   </div>
   <div class="col-md-4">
     <br>
-    <input id="firstname" type="text" name="firstname" placeholder=<%= firstname %>>
+    <input id="firstname" type="text" name="firstname" placeholder=<%= item.firstname %>>
     <br>
-    <input id="lastname" type="text" name="lastname" placeholder="Update Lastname">
+    <input id="lastname" type="text" name="lastname" placeholder=<%= item.lastname %>>
     <br>
-    <input id="email" type="text" name="email" placeholder="Update Email">
+    <input id="email" type="text" name="email" placeholder=<%= item.email %>>
     <br>
-    <input id="cohort" type="text" name="cohort" placeholder="Update Cohort">
+    <input id="cohort" type="text" name="cohort" placeholder=<%= item.cohort %>>
     <br>
-    <input id="program" type="text" name="program" placeholder="Update Program">
+    <input id="program" type="text" name="program" placeholder=<%= item.program %>>
     <br>
-    <input id="city" type="text" name="city" placeholder="Update City">
+    <input id="city" type="text" name="city" placeholder=<%= item.city %>>
     <br>
-    <input id="balanceDue" type="text" name="balanceDue" placeholder="Update Balance">
+    <input id="balanceDue" type="text" name="balanceDue" placeholder=<%= item.balanceDue %>>
     <p>
       <button type=submit class="btn btn-primary">Update Student</button>
     </p>

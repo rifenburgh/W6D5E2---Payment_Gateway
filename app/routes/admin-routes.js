@@ -86,11 +86,12 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
       return;
     }
     //EMail Notification on Invoice Creation
-    var emailUpdate = {
+    const invoiceUrl      = '';
+    const emailUpdate     = {
       from: `Robot <${process.env.EMAIL_SPAM}>`,
       to: email,
       subject: 'Invoice Created',
-      text: 'Testing some Mailgun awesomness!'
+      text: `Good Morning, Please review your new Ironhack invoice.`
     };
     mailgun.messages().send(emailUpdate, function (error, body) {
       console.log(body);
@@ -99,6 +100,7 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
     res.redirect('/admin');
   });
 });
+
 adminRoutes.post('/updatestudent', (req, res, next) => {
   const firstname         = req.body.firstname;
   const lastname          = req.body.lastname;
@@ -127,6 +129,35 @@ adminRoutes.post('/updatestudent', (req, res, next) => {
   });
 });
 
+adminRoutes.get('/sendemail/:id', (req, res, next) => {
+  const id              = req.params.id;
+  Student.findOne({ _id: id }, (err, item) => {
+    if(err) {
+      nextd(err);
+      return;
+    } else {
+      if (item.email === '') {
+        req.flash('message', 'User does not have a valid email address.');
+        return;
+      }
+    }
+    const studentUrl    = `${process.env.STUDENTURL}/payinvoice/${item._id}`;
+    let email           = item.email;
+    console.log('Email ' + email);
+    const emailUpdate   = {
+      from: `Robot <${process.env.EMAIL_SPAM}>`,
+      to: email,
+      subject: 'Payment Reminder',
+      text: `You have an unpaid balance on your student account.  ${studentUrl}`
+    };
+    mailgun.messages().send(emailUpdate, (error, body) => {
+      console.log(body);
+    });
+    res.redirect('/outstandingbalance');
+
+  });
+
+});
 
 
 
@@ -134,16 +165,14 @@ adminRoutes.get('/outstandingbalance', (req, res, next) => {
   //Query all of the students with an open Tuition Balance and display their information on the screen
   //Include a button to send a payment reminder
   var studentMaps         = Student.find({}).exec();
-  console.log(studentMaps);
 
   Student.find({}, function(err, items){
         if(err){
           console.log(err);
         } else{
-            console.log(items);
-            res.render('admin/outstandingbalance.ejs', {
-              items:       items
-            });
+          res.render('admin/outstandingbalance.ejs', {
+            items:       items
+          });
         }
     });
         /*
