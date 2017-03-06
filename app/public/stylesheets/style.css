@@ -40,3 +40,7 @@ table {
 a {
   color: black;
 }
+.paymentform {
+  position: absolute;
+  margin-top: 50%;
+}

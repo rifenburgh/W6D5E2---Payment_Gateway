@@ -1,17 +1,22 @@
-Student Page
+<h2>Student Page</h2>
 
+<div class="col-md-4">
+</div>
+<div class="col-md-4">
 
-<div>
-  <form action="/payinvoice" method="post">
+  <form action="/payinvoice" class="paymentform" method="post">
     <script src="//checkout.stripe.com/v2/checkout.js"
-      class="stripe-button"
-      data-key="<%= keyPublishable %>",
-      data-locale="auto"
-      data-description="Sample Charge"
-      data-amount="<%= balanceDue %>"></script>
+    class="stripe-button"
+    data-key="<%= keyPublishable %>",
+    data-locale="auto"
+    data-description="Sample Charge"
+    data-amount="<%= balanceDue %>"></script>
     <button type="submit">Submit Payment</button>
   </form>
+  </div>
+<div class="col-md-4">
 </div>
+
 
 <br>
 <br>
