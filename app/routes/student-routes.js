@@ -40,6 +40,7 @@ studentRoutes.post('/payinvoice/:id', (req, res, next) => {
   balanceZero = {
     balanceDue: 0
   };
+  //Interact with the STRIPE API and update Payment Gateway Application
   // const Charge          = stripe.charges.connect({
   //   amount:               balanceDue,
   //   currency:             'usd',
