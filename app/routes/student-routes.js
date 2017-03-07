@@ -40,10 +40,6 @@ studentRoutes.post('/payinvoice/:id', (req, res, next) => {
   balanceZero = {
     balanceDue: 0
   };
-  //Does NOT check for payment before zeroing balance
-  Student.findByIdAndUpdate(id, balanceZero, (err, updates) => {
-    res.redirect('/outstandingbalance');
-  });
   // const Charge          = stripe.charges.connect({
   //   amount:               balanceDue,
   //   currency:             'usd',
@@ -53,6 +49,11 @@ studentRoutes.post('/payinvoice/:id', (req, res, next) => {
   //     console.log(charge);
   //     res.redirect('/payinvoice');
   // });
+
+  //Does NOT check for payment before zeroing balance
+  Student.findByIdAndUpdate(id, balanceZero, (err, updates) => {
+  });
+  res.redirect('/');
 });
 //UPDATE Student Data
 studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
