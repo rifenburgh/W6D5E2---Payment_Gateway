@@ -101,7 +101,9 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
   });
 });
 
-adminRoutes.post('/updatestudent', (req, res, next) => {
+//UPDATE Student POST Route is in the protected section.  Only Admins can update Student details.
+adminRoutes.post('/updatestudent/:id', (req, res, next) => {
+  const id                = req.params.id;
   const firstname         = req.body.firstname;
   const lastname          = req.body.lastname;
   const email             = req.body.email;
@@ -118,14 +120,15 @@ adminRoutes.post('/updatestudent', (req, res, next) => {
     city:                   city,
     balanceDue:             balanceDue
   };
-  const newStudent        = new Student(studentInfo);
-  newStudent.save((err) => {
+
+  Student.findByIdAndUpdate(id, studentInfo, (err, updates) => {
     if(err) {
       res.render('admin/createinvoice.ejs', {
         errorMessage: 'Unable to Create Student.'
       });
       return;
     }
+    res.redirect('/outstandingbalance');
   });
 });
 
@@ -141,7 +144,7 @@ adminRoutes.get('/sendemail/:id', (req, res, next) => {
         return;
       }
     }
-    const studentUrl    = `${process.env.STUDENTURL}/payinvoice/${item._id}`;
+    const studentUrl    = `${process.env.STUDENTURL}payinvoice/${item._id}`;
     let email           = item.email;
     console.log('Email ' + email);
     const emailUpdate   = {

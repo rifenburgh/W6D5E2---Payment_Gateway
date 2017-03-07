@@ -3,6 +3,7 @@ const studentRoutes     = express.Router();
 const Student           = require('../models/student-model.js');
 const bcrypt            = require('bcrypt');
 const keyPublishable    = process.env.PUBLISHABLE_KEY;
+const stripe            = require('stripe')(process.env.SECRET_KEY);
 
 //include the /:ID variable in routes as soon as it is available
 //Static ID exists is 2nd item in MongoDB.W6D5E2.students
@@ -24,8 +25,36 @@ studentRoutes.get('/payinvoice/:id', (req, res, next) => {
 
 //Process successful payment and deduct from balanceDue
 studentRoutes.post('/payinvoice/:id', (req, res, next) => {
+  const id              = req.params.id;
+  Student.findById({ id }, (err, item) => {
+    if(err) {
+      next(err);
+      return;
+    }
+    const balanceDue    = item.balanceDue;
 
+  });
+
+  // const token           = req.body.stripeToken;
+  // console.log(token);
+  balanceZero = {
+    balanceDue: 0
+  };
+  //Does NOT check for payment before zeroing balance
+  Student.findByIdAndUpdate(id, balanceZero, (err, updates) => {
+    res.redirect('/outstandingbalance');
+  });
+  // const Charge          = stripe.charges.connect({
+  //   amount:               balanceDue,
+  //   currency:             'usd',
+  //   description:          'tuition payment',
+  //   source:               token
+  // }, function (err, charge) {
+  //     console.log(charge);
+  //     res.redirect('/payinvoice');
+  // });
 });
+//UPDATE Student Data
 studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
   const id              = req.params.id;
 
@@ -34,15 +63,10 @@ studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
       next(err);
       return;
     }
-    const firstname     = item.firstname;
-    const lastname      = item.lastname;
-    console.log(item);
-    console.log(typeof item);
+    // console.log(item);
+    // console.log(typeof item);
     res.render('admin/updatestudent.ejs', {
       item:               item,
-      firstname:          firstname,
-      lastname:           lastname,
-      email:              item.email
     });
   });
 });

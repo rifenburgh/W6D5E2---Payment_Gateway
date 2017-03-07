@@ -1,36 +1,30 @@
 <h2>Update Student Page</h2>
 
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <form class="createinvoice" action="/updatestudent/<%= item._id %>" method="post">
 
-<form class="createinvoice" action="/updatestudent" method="post">
+      <br>
+      <input id="firstname" type="text" name="firstname" value=<%= item.firstname %>>
+      <br>
+      <input id="lastname" type="text" name="lastname" value=<%= item.lastname %>>
+      <br>
+      <input id="email" type="text" name="email" value=<%= item.email %>>
+      <br>
+      <input id="cohort" type="text" name="cohort" value=<%= item.cohort %>>
+      <br>
+      <input id="program" type="text" name="program" value=<%= item.program %>>
+      <br>
+      <input id="city" type="text" name="city" value=<%= item.city %>>
+      <br>
+      <input id="balanceDue" type="text" name="balanceDue" value=<%= item.balanceDue %>>
+      <p>
+        <button type=submit class="btn btn-primary">Update Student</button>
+      </p>
+    </form>
+    </div>
   <div class="col-md-4">
   </div>
-  <div class="col-md-4">
-    <br>
-    <input id="firstname" type="text" name="firstname" placeholder=<%= item.firstname %>>
-    <br>
-    <input id="lastname" type="text" name="lastname" placeholder=<%= item.lastname %>>
-    <br>
-    <input id="email" type="text" name="email" placeholder=<%= item.email %>>
-    <br>
-    <input id="cohort" type="text" name="cohort" placeholder=<%= item.cohort %>>
-    <br>
-    <input id="program" type="text" name="program" placeholder=<%= item.program %>>
-    <br>
-    <input id="city" type="text" name="city" placeholder=<%= item.city %>>
-    <br>
-    <input id="balanceDue" type="text" name="balanceDue" placeholder=<%= item.balanceDue %>>
-    <p>
-      <button type=submit class="btn btn-primary">Update Student</button>
-    </p>
-  </div>
-  <div class="col-md-4">
-  </div>
-
-</form>
-<%= item.firstname %>
-<%= item.lastname %>
-<%= item.email %>
-<%= item.cohort %>
-<%= item.program %>
-<%= item.city %>
-<%= item.balanceDue %>
+</div>

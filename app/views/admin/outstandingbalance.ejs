@@ -3,6 +3,7 @@
 
 <table border="1" class="table-striped">
   <tr>
+    <td></td>
     <td>Firstname</td>
     <td>Lastname</td>
     <td>Email</td>
@@ -17,6 +18,7 @@
   </tr>
 <% items.forEach((item) => { %>
   <tr>
+    <td><a href="/payinvoice/<%= item._id %>">&#9678</a></td>
     <td><a href="/payinvoice/<%= item._id %>"><%= item.firstname %></a></td>
     <td><%= item.lastname %></td>
     <td><%= item.email %></td>

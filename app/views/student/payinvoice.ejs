@@ -25,18 +25,18 @@
       </tr>
       <tr>
         <td>Balance Due</td>
-        <td><%= item.balanceDue %></td>
+        <td>$<%= item.balanceDue %></td>
       </tr>
     </table>
-
-    <form action="/payinvoice" class="paymentform" method="post">
+    
+    <form action="/payinvoice/<%= item.id %>" class="paymentform" method="post">
       <script src="//checkout.stripe.com/v2/checkout.js"
       class="stripe-button"
       data-key="<%= keyPublishable %>",
       data-locale="auto"
       data-description="Sample Charge"
       data-amount="<%= balanceDue %>"></script>
-      <button type="submit">Submit Payment</button>
+      <!-- <button type="submit">Submit Payment</button> -->
     </form>
     </div>
   <div class="col-md-4">
