@@ -53,7 +53,7 @@ studentRoutes.post('/payinvoice/:id', (req, res, next) => {
   //Does NOT check for payment before zeroing balance
   Student.findByIdAndUpdate(id, balanceZero, (err, updates) => {
   });
-  res.redirect('/');
+  res.redirect('/thankyou');
 });
 //UPDATE Student Data
 studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
@@ -80,5 +80,8 @@ studentRoutes.get('/payinvoice/:id/delete', (req, res, next) => {
     }
     res.redirect('/outstandingbalance');
   });
+});
+studentRoutes.get('/thankyou', (req, res, next) => {
+  res.render('student/thankyou.ejs')
 });
 module.exports = studentRoutes;
