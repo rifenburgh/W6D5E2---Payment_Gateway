@@ -23,12 +23,15 @@
     <!-- Navigation Bar -->
     <div class="tempNav">
       <p>
-        <a href="/">Home</a>
-        | <a href="/admin">Admin</a>
-        | <a href="/login">Login</a>
-        | <a href="/logout">Logout</a>
+        <% if (!user) { %>
+        | <a href="/login">Ironhack Login</a>
+        <% } %>
+        <% if (user) { %>
+        | Hi, <%= user.firstName %>.
         | <a href="/createinvoice">Create Invoice</a>
         | <a href="/outstandingbalance">Outstanding Balance</a>
+        | <a href="/logout">Logout</a>
+        <% } %>
 
       </p>
     </div>
