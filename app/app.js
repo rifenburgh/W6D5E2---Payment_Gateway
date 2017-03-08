@@ -31,6 +31,7 @@ const ensure            = require('connect-ensure-login');
 // const User              = require('./models/user.js');
 const Student           = require('./models/student-model.js');
 const Admin             = require('./models/admin-model.js');
+const User              = require('./models/user-model.js');
 // const flash             = require('connect-flash');
 
 // var users = require('./routes/users');
@@ -91,13 +92,52 @@ passport.use(new LocalStrategy((username, password, next) => {
   });
 }));
 
-passport.use(new GoogleStrategy({
-  clientID: process.env.KEY_GOOGLE_PUBLIC,
-  clientSecret: process.env.KEY_GOOGLE_SECRET,
-  callbackURL: process.env.HOST_ADDRESS + '/auth/google/callback'
-}, (accessToken, refreshToken, profile, next) => {
-  next(null, profile);
-}));
+//START GOOGLE OAUTH
+passport.use(new GoogleStrategy(
+  {
+    clientID: process.env.KEY_GOOGLE_PUBLIC,
+    clientSecret: process.env.KEY_GOOGLE_SECRET,
+    callbackURL: process.env.KEY_GOOGLE_REDIRECT + '/auth/google/callback'
+  },
+  saveSocialUser // <──◉ social login callback
+));
+
+function saveSocialUser (accessToken, refreshToken, profile, done) {
+  // See if there's a user from the provider with the given id.
+  User.findOne(
+    { provider: profile.provider, providerId: profile.id },
+    (err, userDocument) => {
+      // If there's an error or a user was retrieved, notify Passport by calling "done()".
+      if (err || userDocument) {
+        done(err, userDocument);
+        return;
+      }
+      // Otherwise attempt to save a new user (no username or password).
+      const names = profile.displayName.split(' ');
+      const theUser = new User({
+        firstName: names[0],
+        lastName: names.slice(1).join(' '),
+        provider: profile.provider,
+        providerId: profile.id
+      });
+
+      theUser.save((err, userDocument) => {
+        // Notify Passport about the result by calling "done()".
+        done(err, userDocument);
+      });
+    }
+  );
+}
+// Send logged-in user info into every view
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.locals.user = req.user;
+  } else {
+    res.locals.user = null;
+  }
+  next();
+});
+//END GOOGLE OAUTH
 
 passport.serializeUser((user, cb) => {
   if (user.provider) {

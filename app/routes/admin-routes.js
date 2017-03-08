@@ -68,7 +68,7 @@ adminRoutes.get('/logout', (req, res) => {
   req.flash('success', 'You have successfully logged out.');
   res.redirect('/admin');
 });
-adminRoutes.get('/createinvoice', (req, res, next) => {
+adminRoutes.get('/createinvoice', ensure.ensureLoggedIn(), (req, res, next) => {
   res.render('admin/createinvoice.ejs');
 });
 adminRoutes.post('/createinvoice', (req, res, next) => {
