@@ -8,7 +8,8 @@ var router               = express.Router();
 /* GET home page. */
 router.get('/', (req, res, next) => {
   res.render('index.ejs', {
-    keyPublishable: process.env.PUBLISHABLE_KEY
+    // keyPublishable:       process.env.PUBLISHABLE_KEY,
+    userInfo:             req.user
     // keyPublishable: keyPublishable
   });
 });

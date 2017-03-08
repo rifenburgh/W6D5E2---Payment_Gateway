@@ -10,7 +10,6 @@ const keyPublishable    = process.env.PUBLISHABLE_KEY;
 const keySecret         = process.env.SECRET_KEY;
 
 //-----------STRIPE STRIPE STRIPE---------------------
-
 const express           = require('express');
 const path              = require('path');
 const favicon           = require('serve-favicon');
@@ -92,12 +91,12 @@ passport.use(new LocalStrategy((username, password, next) => {
   });
 }));
 
-//START GOOGLE OAUTH
+//-----------------START GOOGLE OAUTH--------------------
 passport.use(new GoogleStrategy(
   {
-    clientID: process.env.KEY_GOOGLE_PUBLIC,
-    clientSecret: process.env.KEY_GOOGLE_SECRET,
-    callbackURL: process.env.KEY_GOOGLE_REDIRECT + '/auth/google/callback'
+    clientID:              process.env.KEY_GOOGLE_PUBLIC,
+    clientSecret:          process.env.KEY_GOOGLE_SECRET,
+    callbackURL:           process.env.KEY_GOOGLE_REDIRECT + '/auth/google/callback'
   },
   saveSocialUser // <──◉ social login callback
 ));
@@ -112,13 +111,14 @@ function saveSocialUser (accessToken, refreshToken, profile, done) {
         done(err, userDocument);
         return;
       }
+
       // Otherwise attempt to save a new user (no username or password).
-      const names = profile.displayName.split(' ');
-      const theUser = new User({
-        firstName: names[0],
-        lastName: names.slice(1).join(' '),
-        provider: profile.provider,
-        providerId: profile.id
+      const names =       profile.displayName.split(' ');
+      const theUser =     new User({
+        firstName:        names[0],
+        lastName:         names.slice(1).join(' '),
+        provider:         profile.provider,
+        providerId:       profile.id
       });
 
       theUser.save((err, userDocument) => {
@@ -128,6 +128,7 @@ function saveSocialUser (accessToken, refreshToken, profile, done) {
     }
   );
 }
+
 // Send logged-in user info into every view
 app.use((req, res, next) => {
   if (req.isAuthenticated()) {
@@ -137,7 +138,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-//END GOOGLE OAUTH
+//-------------------END GOOGLE OAUTH---------------------
 
 passport.serializeUser((user, cb) => {
   if (user.provider) {
@@ -181,8 +182,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.message    = err.message;
+  res.locals.error      = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);

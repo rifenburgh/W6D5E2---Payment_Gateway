@@ -12,7 +12,7 @@ adminRoutes.get('/admin', (req, res, next) => {
   res.render('admin/index.ejs');
 });
 adminRoutes.get('/signup', (req, res, next) => {
-  res.render('admin/signup.ejs');
+  res.render('admin/login.ejs');
 });
 
 adminRoutes.post('/signup', (req, res, next) => {
@@ -69,7 +69,11 @@ adminRoutes.get('/logout', (req, res) => {
   res.redirect('/admin');
 });
 adminRoutes.get('/createinvoice', ensure.ensureLoggedIn(), (req, res, next) => {
-  res.render('admin/createinvoice.ejs');
+  const userInfo          = req.user;
+  res.render('admin/createinvoice.ejs',{
+    userInfo:               userInfo
+  });
+  console.log(req.user);
 });
 adminRoutes.post('/createinvoice', (req, res, next) => {
   const firstname         = req.body.firstname;
@@ -174,18 +178,18 @@ adminRoutes.get('/sendemail/:id', (req, res, next) => {
 });
 
 
-
 adminRoutes.get('/outstandingbalance', (req, res, next) => {
   //Query all of the students with an open Tuition Balance and display their information on the screen
   //Include a button to send a payment reminder
-  var studentMaps         = Student.find({}).exec();
-
+  const studentMaps     = Student.find({}).exec();
+  const userInfo        = req.user;
   Student.find({}, function(err, items){
         if(err){
           console.log(err);
         } else{
           res.render('admin/outstandingbalance.ejs', {
-            items:       items
+            items:       items,
+            userInfo:    userInfo
           });
         }
     });
