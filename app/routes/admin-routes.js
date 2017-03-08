@@ -5,6 +5,7 @@ const Student           = require('../models/student-model.js');
 const bcrypt            = require('bcrypt');
 const passport          = require('passport');
 const mongoose          = require('mongoose');
+const ensure            = require('connect-ensure-login');
 const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_ACTIVE, domain: process.env.MAILGUN_DOMAIN});
 
 adminRoutes.get('/admin', (req, res, next) => {
@@ -50,8 +51,18 @@ adminRoutes.post('/login', passport.authenticate('local', {
   successFlash: 'You have successfully logged in.',
   passReqToCallback: true
   })
-
 );
+
+adminRoutes.get('/auth/google', passport.authenticate('google', {
+  scope:                  ["https://www.googleapis.com/auth/plus.login",
+                          "https://www.googleapis.com/auth/plus.profile.emails.read"]
+}));
+adminRoutes.get("/auth/google/callback", passport.authenticate("google", {
+  successRedirect:        "/",
+  failureRedirect:        "/login",
+}));
+
+
 adminRoutes.get('/logout', (req, res) => {
   req.logout();
   req.flash('success', 'You have successfully logged out.');

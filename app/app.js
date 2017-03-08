@@ -27,6 +27,7 @@ const GoogleStrategy    = require('passport-google-oauth').OAuth2Strategy;
 const session           = require('express-session');
 const bcrypt            = require('bcrypt');
 const flash             = require('connect-flash');
+const ensure            = require('connect-ensure-login');
 // const User              = require('./models/user.js');
 const Student           = require('./models/student-model.js');
 const Admin             = require('./models/admin-model.js');
@@ -89,6 +90,7 @@ passport.use(new LocalStrategy((username, password, next) => {
     }
   });
 }));
+
 passport.use(new GoogleStrategy({
   clientID: process.env.KEY_GOOGLE_PUBLIC,
   clientSecret: process.env.KEY_GOOGLE_SECRET,
