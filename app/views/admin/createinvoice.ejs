@@ -29,14 +29,11 @@
 </div>
 
 
+
+<form class="createinvoice" action="/createinvoice" method="post">
   <div class="col-md-4">
   </div>
-
-  <% if (user.firstName === 'Kristy') { %>
-    <a href="http://bikeformiami.com"><button class="btn btn-primary">Create Student?</button></a>
-    <% } else { %>
   <div class="col-md-4">
-    <form class="createinvoice" action="/createinvoice" method="post">
     <input id="firstname" type="text" name="firstname" placeholder="Firstname">
     <br>
     <input id="lastname" type="text" name="lastname" placeholder="Lastname">
@@ -53,8 +50,8 @@
     <p>
       <button type=submit class="btn btn-primary">Create Student</button>
     </p>
-  </form>
   </div>
-  <% } %>
   <div class="col-md-4">
   </div>
+
+</form>

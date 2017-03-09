@@ -1,0 +1,148 @@
+body {
+  margin: 0px;
+  font: 14px Arial;
+  background-color: #386373;
+
+}
+
+.main-div {
+  background-color: #386373;
+}
+/*------------------------------------*/
+
+/*navigation bar and footer*/
+a {
+  text-decoration: none;
+}
+
+.nav-bar {
+  background-color: #fff;
+}
+
+.logo {
+  width: 100px;
+  margin-left: 120px;
+  margin-top: 13px;
+}
+
+.margin-logo {
+  margin-top: 13px;
+}
+
+.w-nav-menu {
+  display: inline;
+  float: right;
+  margin-right: 150px;
+  margin-top: 12px;
+}
+
+.w-nav-link {
+  padding: 20px;
+  text-decoration: none;
+}
+
+.nav-link {
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  font-family: 'Open Sans', sans-serif;
+  color: #5c5c5c;
+  text-decoration: none;
+  text-transform: uppercase;
+  float: right;
+}
+
+.nav-link:hover {
+  border-bottom-color: #f02e4e;
+}
+
+.nav-link.w--current {
+  border-bottom-color: #f02e4e;
+  color: #f02e4e;
+}
+
+.footer {
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+/*---------------------------------------*/
+
+
+/*index-page*/
+.index-main {
+  height: 575px;
+  background-image: url(/images/trail1light.jpg);
+}
+
+.index-large-title {
+  text-align: center;
+  color: white;
+  margin-top: 143px;
+  font-size: 64px;
+}
+
+.index-small-title {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+/*-----------------------------------*/
+
+#form {
+  margin: 30px auto;
+  width: 380px;
+}
+
+#form label {
+  color: white;
+  display: inline-block;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+#form input,
+#form button {
+  box-sizing: border-box;
+  font-size: 14px;
+  outline: 0;
+  padding: 4px;
+  width: 100%;
+}
+
+#form button {
+  background: #43a3e6;
+  border: 1px solid #43a3e6;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: .3s ease background;
+  width: 100%;
+}
+
+#form button:hover {
+  background: #fff;
+  color: #43a3e6;
+  transition: .3s ease background;
+}
+
+.error {
+  background: #da0b0b;
+  box-sizing: border-box;
+  color: #fff;
+  margin: 20px auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.login-buttons {
+  height: 47px;
+}

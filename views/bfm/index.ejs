@@ -1,0 +1,8 @@
+<title>Trail Index</title>
+<ul>
+  <% trails.forEach((oneTrail) => { %>
+    <li>
+      <h2> <a href="/trails/<%=oneTrail._id %>"><%= oneTrail.trailName %></a> </h2>
+    </li>
+  <% }) %>
+</ul>
