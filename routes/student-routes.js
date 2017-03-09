@@ -35,27 +35,16 @@ studentRoutes.post('/payinvoice/:id', (req, res, next) => {
 
   });
 
-  // const token           = req.body.stripeToken;
-  // console.log(token);
   balanceZero = {
     balanceDue: 0
   };
-  //Interact with the STRIPE API and update Payment Gateway Application
-  // const Charge          = stripe.charges.connect({
-  //   amount:               balanceDue,
-  //   currency:             'usd',
-  //   description:          'tuition payment',
-  //   source:               token
-  // }, function (err, charge) {
-  //     console.log(charge);
-  //     res.redirect('/payinvoice');
-  // });
 
   //Does NOT check for payment before zeroing balance
   Student.findByIdAndUpdate(id, balanceZero, (err, updates) => {
   });
   res.redirect('/thankyou');
 });
+
 //UPDATE Student Data
 studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
   const id              = req.params.id;
@@ -65,13 +54,12 @@ studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
       next(err);
       return;
     }
-    // console.log(item);
-    // console.log(typeof item);
     res.render('admin/updatestudent.ejs', {
       item:               item,
     });
   });
 });
+
 studentRoutes.get('/payinvoice/:id/delete', (req, res, next) => {
   const id              = req.params.id;
   Student.findByIdAndRemove(id, (err, item) => {
@@ -82,7 +70,9 @@ studentRoutes.get('/payinvoice/:id/delete', (req, res, next) => {
     res.redirect('/outstandingbalance');
   });
 });
+
 studentRoutes.get('/thankyou', (req, res, next) => {
   res.render('student/thankyou.ejs')
 });
+
 module.exports = studentRoutes;

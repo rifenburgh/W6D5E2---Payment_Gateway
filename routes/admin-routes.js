@@ -11,6 +11,7 @@ const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN
 adminRoutes.get('/admin', (req, res, next) => {
   res.render('admin/index.ejs');
 });
+
 adminRoutes.get('/signup', (req, res, next) => {
   res.render('admin/login.ejs');
 });
@@ -39,11 +40,13 @@ adminRoutes.post('/signup', (req, res, next) => {
     });
   });
 });
+
 adminRoutes.get('/login', (req, res, next) => {
   res.render('admin/login.ejs', {
     // errorMessage: req.flash('error', 'Ther was an issue.');
   });
 });
+
 adminRoutes.post('/login', passport.authenticate('local', {
   successReturnToOrRedirect: '/admin',
   failureRedirect: '/login',
@@ -53,21 +56,24 @@ adminRoutes.post('/login', passport.authenticate('local', {
   })
 );
 
+//-----GOOGLE OAUTH START-----
 adminRoutes.get('/auth/google', passport.authenticate('google', {
   scope:                  ["https://www.googleapis.com/auth/plus.login",
                           "https://www.googleapis.com/auth/plus.profile.emails.read"]
 }));
+
 adminRoutes.get("/auth/google/callback", passport.authenticate("google", {
   successRedirect:        "/",
   failureRedirect:        "/login",
 }));
-
+//-----GOOGLE OAUTH END------
 
 adminRoutes.get('/logout', (req, res) => {
   req.logout();
   req.flash('success', 'You have successfully logged out.');
   res.redirect('/admin');
 });
+
 adminRoutes.get('/createinvoice', ensure.ensureLoggedIn(), (req, res, next) => {
   const userInfo          = req.user;
   res.render('admin/createinvoice.ejs',{
@@ -75,6 +81,7 @@ adminRoutes.get('/createinvoice', ensure.ensureLoggedIn(), (req, res, next) => {
   });
   console.log(req.user);
 });
+
 adminRoutes.post('/createinvoice', (req, res, next) => {
   const firstname         = req.body.firstname;
   const lastname          = req.body.lastname;
@@ -143,6 +150,18 @@ adminRoutes.post('/updatestudent/:id', (req, res, next) => {
       });
       return;
     }
+    //EMail Notification on Invoice Updates
+    const invoiceUrl      = '';
+    const emailUpdate     = {
+      from: `Robot <${process.env.EMAIL_SPAM}>`,
+      to: email,
+      subject: 'Updates Comleted',
+      text: `Good Morning, Your invoice has beeen updated.`
+    };
+    mailgun.messages().send(emailUpdate, function (error, body) {
+      console.log(body);
+    });
+    //POST-save and email notification redirect on UPDATES
     res.redirect('/outstandingbalance');
   });
 });
@@ -172,11 +191,8 @@ adminRoutes.get('/sendemail/:id', (req, res, next) => {
       console.log(body);
     });
     res.redirect('/outstandingbalance');
-
   });
-
 });
-
 
 adminRoutes.get('/outstandingbalance', (req, res, next) => {
   //Query all of the students with an open Tuition Balance and display their information on the screen
@@ -193,16 +209,6 @@ adminRoutes.get('/outstandingbalance', (req, res, next) => {
           });
         }
     });
-        /*
-        Student.findOne({}, (err, items) => {
-          console.log(items);
-          const i = 0;
-        });
-        items.forEach((item) => {
-          console.lot(item);
-        });
-        */
 });
-
 
 module.exports          = adminRoutes;

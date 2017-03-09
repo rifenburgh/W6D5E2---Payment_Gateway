@@ -3,43 +3,46 @@
 <div class="row">
   <div class="col-md-4">
   </div>
+
   <div class="col-md-4">
-    <form class="createinvoice" action="/updatestudent/<%= item._id %>" method="post">
-    <table>
-      <tr>
-        <td><label for="firstname"> Firstname </label></td>
-        <td><input id="firstname" type="text" name="firstname" value=<%= item.firstname %>></td>
-      </tr>
-      <tr>
-        <td><label for="lastname"> Lastname </label></td>
-        <td><input id="lastname" type="text" name="lastname" value=<%= item.lastname %>></td>
-      </tr>
-      <tr>
-        <td><label for="email"> Email </label></td>
-        <td><input id="email" type="text" name="email" value=<%= item.email %>></td>
-      </tr>
-      <tr>
-        <td><label for="cohort"> Cohort </label></td>
-        <td><input id="cohort" type="text" name="cohort" value=<%= item.cohort %>></td>
-      </tr>
-      <tr>
-        <td><label for="program"> Program </label></td>
-        <td><input id="program" type="text" name="program" value=<%= item.program %>></td>
-      </tr>
-      <tr>
-        <td><label for="city"> City </label></td>
-        <td><input id="city" type="text" name="city" value=<%= item.city %>></td>
-      </tr>
-      <tr>
-        <td><label for="balanceDue"> Balance Due </label></td>
-        <td><input id="balanceDue" type="text" name="balanceDue" value=<%= item.balanceDue %>></td>
-      </tr>
-    </table>
-    <p>
-    <button type=submit class="btn btn-primary">Update Student</button>
-    </p>
-  </form>
-</div>
-<div class="col-md-4">
-</div>
+      <form class="createinvoice" action="/updatestudent/<%= item._id %>" method="post">
+        <table>
+          <tr>
+            <td><label for="firstname"> Firstname </label></td>
+            <td><input id="firstname" type="text" name="firstname" value=<%= item.firstname %>></td>
+          </tr>
+          <tr>
+            <td><label for="lastname"> Lastname </label></td>
+            <td><input id="lastname" type="text" name="lastname" value=<%= item.lastname %>></td>
+          </tr>
+          <tr>
+            <td><label for="email"> Email </label></td>
+            <td><input id="email" type="text" name="email" value=<%= item.email %>></td>
+          </tr>
+          <tr>
+            <td><label for="cohort"> Cohort </label></td>
+            <td><input id="cohort" type="text" name="cohort" value=<%= item.cohort %>></td>
+          </tr>
+          <tr>
+            <td><label for="program"> Program </label></td>
+            <td><input id="program" type="text" name="program" value=<%= item.program %>></td>
+          </tr>
+          <tr>
+            <td><label for="city"> City </label></td>
+            <td><input id="city" type="text" name="city" value=<%= item.city %>></td>
+          </tr>
+          <tr>
+            <td><label for="balanceDue"> Balance Due </label></td>
+            <td><input id="balanceDue" type="text" name="balanceDue" value=<%= item.balanceDue %>></td>
+          </tr>
+        </table>
+      <p>
+      <button type=submit class="btn btn-primary">Update Student</button>
+      </p>
+    </form>
+  </div>
+
+  <div class="col-md-4">
+  </div>
+
 </div>

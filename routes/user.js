@@ -1,3 +1,4 @@
+//This functionality not currently utilized.
 const express           = require('express');
 const routes            = express.Router();
 const User              = require('../models/user.js');
@@ -26,7 +27,7 @@ routes.get('/createinvoice', (req, res, next) => {});
 routes.post('/creatinvoice', (req, res, next) => {});
 
 //Reporting
-//General reporting of invoices paid/outstanding 
+//General reporting of invoices paid/outstanding
 routes.get('/viewinvoice', (req, res, next) => {});
 routes.get('/bymonth', (req, res, next) => {});
 routes.get('/bycohort', (req, res, next) => {});

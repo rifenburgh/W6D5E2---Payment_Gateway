@@ -1,14 +1,6 @@
 //-----------STRIPE STRIPE STRIPE---------------------
-//START DEVELOPMENT (Stripe)
-// const PUBLISHABLE_KEY   = 'pk_test_6pRNASCoBOKtIshFeQd4XMUh';
-// const SECRET_KEY        = 'sk_test_BQokikJOvBiI2HlWgH4olfQ2';
-// const creditCard        = '4242 4242 4242 4242';
-//END DEVELOPMENT (Stripe)
-//Stripe payment variables -
-//Use For PRODUCTION (Stripe)
 const keyPublishable    = process.env.PUBLISHABLE_KEY;
 const keySecret         = process.env.SECRET_KEY;
-
 //-----------STRIPE STRIPE STRIPE---------------------
 const express           = require('express');
 const path              = require('path');
@@ -27,26 +19,17 @@ const session           = require('express-session');
 const bcrypt            = require('bcrypt');
 const flash             = require('connect-flash');
 const ensure            = require('connect-ensure-login');
-// const User              = require('./models/user.js');
 const Student           = require('./models/student-model.js');
 const Admin             = require('./models/admin-model.js');
 const User              = require('./models/user-model.js');
 // const flash             = require('connect-flash');
 
-// var users = require('./routes/users');
-
-
-//Connect to MongoDB using Mongoose
-
-
+//Create initial instnaces and Connect to MongoDB using Mongoose
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 const app               = express();
 const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_ACTIVE, domain: process.env.MAILGUN_DOMAIN});
 const stripe            = require('stripe')(process.env.SECRET_KEY);
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -98,7 +81,7 @@ passport.use(new GoogleStrategy(
     clientSecret:          process.env.KEY_GOOGLE_SECRET,
     callbackURL:           process.env.KEY_GOOGLE_REDIRECT + '/auth/google/callback'
   },
-  saveSocialUser // <──◉ social login callback
+  saveSocialUser
 ));
 
 function saveSocialUser (accessToken, refreshToken, profile, done) {
@@ -169,7 +152,6 @@ const adminRoutes       = require('./routes/admin-routes');
 app.use('/', index);
 app.use('/', studentRoutes);
 app.use('/', adminRoutes);
-// app.use('/users', users);
 //END Routes
 
 // catch 404 and forward to error handler
