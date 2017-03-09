@@ -123,6 +123,23 @@ adminRoutes.post('/createinvoice', (req, res, next) => {
   });
 });
 
+//UPDATE Student Data
+adminRoutes.get('/payinvoice/:id/update', ensure.ensureLoggedIn(), (req, res, next) => {
+  const id                = req.params.id;
+
+  Student.findOne({ _id: id }, (err, item) => {
+    if(err) {
+      next(err);
+      return;
+    }
+    res.render('admin/updatestudent.ejs', {
+      item:               item,
+    });
+  });
+});
+
+
+
 //UPDATE Student POST Route is in the protected section.  Only Admins can update Student details.
 adminRoutes.post('/updatestudent/:id', (req, res, next) => {
   const id                = req.params.id;

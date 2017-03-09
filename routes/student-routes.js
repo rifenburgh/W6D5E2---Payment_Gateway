@@ -45,20 +45,6 @@ studentRoutes.post('/payinvoice/:id', (req, res, next) => {
   res.redirect('/thankyou');
 });
 
-//UPDATE Student Data
-studentRoutes.get('/payinvoice/:id/update', (req, res, next) => {
-  const id              = req.params.id;
-
-  Student.findOne({ _id: id }, (err, item) => {
-    if(err) {
-      next(err);
-      return;
-    }
-    res.render('admin/updatestudent.ejs', {
-      item:               item,
-    });
-  });
-});
 
 studentRoutes.get('/payinvoice/:id/delete', (req, res, next) => {
   const id              = req.params.id;
