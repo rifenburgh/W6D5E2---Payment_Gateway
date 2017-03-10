@@ -2,29 +2,72 @@
 
 <h5>Welcome back, <%= userInfo.firstName %>.  Create a new student invoice below.</h5>
 <div class="row">
+  <% if (user.firstName === 'Kristy') { %>
+    <a href="http://bikeformiami.com"><button class="btn btn-primary">Create Student?</button></a>
+  <% } else { %>
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-5">
+    <h3>Student Invoice</h3>
+    <form class="createinvoice" action="/createinvoice" method="post">
+      <table class="table createTable">
+        <tr>
+          <td><input id="firstname" type="text" name="firstname" placeholder="Firstname"></td>
+        </tr>
+        <tr>
+          <td><input id="lastname" type="text" name="lastname" placeholder="Lastname"></td>
+        </tr>
+        <tr>
+          <td><input id="email" type="text" name="email" placeholder="Email"></td>
+        </tr>
+        <tr>
+          <td><input id="cohort" type="text" name="cohort" placeholder="Cohort"></td>
+        </tr>
+        <tr>
+          <td><input id="program" type="text" name="program" placeholder="Program"></td>
+        </tr>
+        <tr>
+          <td><input id="city" type="text" name="city" placeholder="City"></td>
+        </tr>
+        <tr>
+          <td><input id="balanceDue" type="text" name="balanceDue" placeholder="Balance Due"></td>
+        </tr>
+        <tr>
+          <td><button type=submit class="btn btn-primary">Create Student</button></td>
+        </tr>
+      </table>
+    </form>
 
-  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-6">
     <h3>Miami Full-time Web Dev</h3>
     <div class="panel panel-success" id="2017JANMIAMIFTWD">JAN23 - APR03</div>
     <div class="panel panel-info" id="2017MAYMIAMIFTWD">MAY29 - AUG4</div>
     <div class="panel panel-success" id="2017JULMIAMIFTWD">JUL24 - OCT13</div>
     <div class="panel panel-info" id="2017AUGMIAMIFTWD">AUG28 - NOV22</div>
-  </div>
-
-  <div class="col-md-4">
     <h3>Miami Full-time UX/UI</h3>
     <div class="panel panel-success" id="2017JANMIAMIFTUX">JAN23 - MAR20</div>
     <div class="panel panel-info" id="2017APRMIAMIFTUX">APR10 - JUN02</div>
     <div class="panel panel-success" id="2017JUNMIAMIFTUX">JUN12 - AUG04</div>
     <div class="panel panel-info" id="2017OCTMIAMIFTUX">OCT02 - NOV24</div>
+    <h3>Miami Part-time Web Dev</h3>
+    <div class="panel panel-success" id="2017MAYMIAMIPTWD">MAY30 - NOV25</div>
+    <!-- <div class="panel panel-info" id="TBD">TBD</div>
+    <div class="panel panel-success" id="TBD">TBD</div>
+    <div class="panel panel-info" id="TBD">TBD</div> -->
+
+
+  </div>
+  <% } %>
+</div>
+
   </div>
 
   <div class="col-md-4">
-    <h3>Miami Part-time Web Dev</h3>
-    <div class="panel panel-success" id="2017MAYMIAMIPTWD">MAY30 - NOV25</div>
-    <div class="panel panel-info" id="TBD">TBD</div>
-    <div class="panel panel-success" id="TBD">TBD</div>
-    <div class="panel panel-info" id="TBD">TBD</div>
+  </div>
+
+  <div class="col-md-4">
   </div>
 </div>
 
@@ -35,34 +78,6 @@
     <a href="http://bikeformiami.com"><button class="btn btn-primary">Create Student?</button></a>
     <% } else { %>
   <div class="col-md-4">
-    <form class="createinvoice" action="/createinvoice" method="post">
-    <table class="table">
-      <tr>
-        <td><input id="firstname" type="text" name="firstname" placeholder="Firstname"></td>
-      </tr>
-      <tr>
-        <td><input id="lastname" type="text" name="lastname" placeholder="Lastname"></td>
-      </tr>
-      <tr>
-        <td><input id="email" type="text" name="email" placeholder="Email"></td>
-      </tr>
-      <tr>
-        <td><input id="cohort" type="text" name="cohort" placeholder="Cohort"></td>
-      </tr>
-      <tr>
-        <td><input id="program" type="text" name="program" placeholder="Program"></td>
-      </tr>
-      <tr>
-        <td><input id="city" type="text" name="city" placeholder="City"></td>
-      </tr>
-      <tr>
-        <td><input id="balanceDue" type="text" name="balanceDue" placeholder="Balance Due"></td>
-      </tr>
-      <tr>
-        <td><button type=submit class="btn btn-primary">Create Student</button></td>
-      </tr>
-    </table>
-  </form>
   </div>
   <% } %>
   <div class="col-md-4">

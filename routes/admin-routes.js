@@ -48,7 +48,7 @@ adminRoutes.get('/login', (req, res, next) => {
 });
 
 adminRoutes.post('/login', passport.authenticate('local', {
-  successReturnToOrRedirect: '/admin',
+  successReturnToOrRedirect: '/outstandingbalance',
   failureRedirect: '/login',
   failureFlash: true,
   successFlash: 'You have successfully logged in.',
@@ -63,7 +63,7 @@ adminRoutes.get('/auth/google', passport.authenticate('google', {
 }));
 
 adminRoutes.get("/auth/google/callback", passport.authenticate("google", {
-  successRedirect:        "/",
+  successRedirect:        "/outstandingbalance",
   failureRedirect:        "/login",
 }));
 //-----GOOGLE OAUTH END------
@@ -80,7 +80,6 @@ adminRoutes.get('/createinvoice', ensure.ensureLoggedIn(), (req, res, next) => {
     userInfo:               userInfo
   });
   //testing
-  debugger;
   console.log(req.user);
 });
 
