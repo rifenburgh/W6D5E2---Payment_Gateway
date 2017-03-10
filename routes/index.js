@@ -3,7 +3,7 @@ var router               = express.Router();
 
 //Render Home Page
 router.get('/', (req, res, next) => {
-  res.render('index.ejs', {
+  res.render('admin/login.ejs', {
     userInfo:             req.user
   });
 });

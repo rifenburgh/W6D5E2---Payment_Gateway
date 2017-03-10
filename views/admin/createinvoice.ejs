@@ -36,22 +36,32 @@
     <% } else { %>
   <div class="col-md-4">
     <form class="createinvoice" action="/createinvoice" method="post">
-    <input id="firstname" type="text" name="firstname" placeholder="Firstname">
-    <br>
-    <input id="lastname" type="text" name="lastname" placeholder="Lastname">
-    <br>
-    <input id="email" type="text" name="email" placeholder="Email">
-    <br>
-    <input id="cohort" type="text" name="cohort" placeholder="Cohort">
-    <br>
-    <input id="program" type="text" name="program" placeholder="Program">
-    <br>
-    <input id="city" type="text" name="city" placeholder="City">
-    <br>
-    <input id="balanceDue" type="text" name="balanceDue" placeholder="Balance Due">
-    <p>
-      <button type=submit class="btn btn-primary">Create Student</button>
-    </p>
+    <table class="table">
+      <tr>
+        <td><input id="firstname" type="text" name="firstname" placeholder="Firstname"></td>
+      </tr>
+      <tr>
+        <td><input id="lastname" type="text" name="lastname" placeholder="Lastname"></td>
+      </tr>
+      <tr>
+        <td><input id="email" type="text" name="email" placeholder="Email"></td>
+      </tr>
+      <tr>
+        <td><input id="cohort" type="text" name="cohort" placeholder="Cohort"></td>
+      </tr>
+      <tr>
+        <td><input id="program" type="text" name="program" placeholder="Program"></td>
+      </tr>
+      <tr>
+        <td><input id="city" type="text" name="city" placeholder="City"></td>
+      </tr>
+      <tr>
+        <td><input id="balanceDue" type="text" name="balanceDue" placeholder="Balance Due"></td>
+      </tr>
+      <tr>
+        <td><button type=submit class="btn btn-primary">Create Student</button></td>
+      </tr>
+    </table>
   </form>
   </div>
   <% } %>

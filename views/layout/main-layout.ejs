@@ -17,7 +17,7 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -38,10 +38,14 @@
     <!-- EJS Body content  -->
     <!-- Background Video - commented out for dev purposes -->
     <img src="/images/logo.png" class="logo" alt="Iron Hack Logo" width="60px">
+    <%if (!user) { %>
     <video poster="/videos/" id="bgvid" class="video" playsinline autoplay muted loop>
       <!-- <source src="http://thenewcode.com/assets/videos/polina.webm" type="video/webm"> -->
       <source src="/videos/video.mp4" type="video/mp4">
     </video>
+    <% } else { %>
+      <img src="/images/background.jpg" alt="Sunset over Chalong" class="backgroundImage" />
+    <% } %>
     <%- body -%>
     <!-- Footer -->
   </body>

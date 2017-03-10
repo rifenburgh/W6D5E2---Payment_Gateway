@@ -2,20 +2,20 @@
 <h5>Welcome back, <%= userInfo.firstName %>.  Manage Student invoices below.</h5>
 
 
-<table border="1" class="table-striped">
+<table border="1" class="table-striped outstandingTable">
   <tr>
     <td></td>
-    <td>Firstname</td>
-    <td>Lastname</td>
-    <td>Email</td>
-    <td>Cohort</td>
-    <td>Program</td>
-    <td>City</td>
-    <td>Balance Due</td>
-    <td>Transaction History</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><h4>Firstname</h4></h4></td>
+    <td><h4>Lastname</h4></td>
+    <td><h4>Email</h4></td>
+    <td><h4>Cohort</h4></td>
+    <td><h4>Program</h4></td>
+    <td><h4>City</h4></td>
+    <td><h4>Balance Due</h4></td>
+    <td><h4>Transaction History</h4></td>
+    <td><h4></h4></td>
+    <td><h4></h4></td>
+    <td><h4></h4></td>
   </tr>
 <% items.forEach((item) => { %>
   <tr>
@@ -29,9 +29,9 @@
     <td>$<%= item.balanceDue %></td>
     <td><%= item.transactionHistory[0] %>KH</td>
     <% if(user.firstName === 'Kristy') { %>
-      <td><a href="http://bikeformiami.com"><button class="btn btn-info">Update</button></a></td>
-      <td><a href="http://bikeformiami.com"><button class="btn btn-danger">Delete</button></a></td>
-      <td><a href="http://bikeformiami.com"><button class="btn btn-primary">Send Reminder</button></a></td>
+      <td><a href="http://bikeformiami.com"><button class="btn btn-info leftFloat">Update</button></a></td>
+      <td><a href="http://bikeformiami.com"><button class="btn btn-danger leftFloat">Delete</button></a></td>
+      <td><a href="http://bikeformiami.com"><button class="btn btn-primary leftFloat">Send Reminder</button></a></td>
     <% } else { %>
       <td><a href="/payinvoice/<%= item._id %>/update"><button class="btn btn-info">Update</button></a></td>
       <td><a href="/payinvoice/<%= item._id %>/delete"><button class="btn btn-danger">Delete</button></a></td>

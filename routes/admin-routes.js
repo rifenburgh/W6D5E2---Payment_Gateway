@@ -9,7 +9,7 @@ const ensure            = require('connect-ensure-login');
 const mailgun           = require('mailgun-js')({apiKey: process.env.KEY_MAILGUN_ACTIVE, domain: process.env.MAILGUN_DOMAIN});
 
 adminRoutes.get('/admin', (req, res, next) => {
-  res.render('admin/index.ejs');
+  res.render('admin/login.ejs');
 });
 
 adminRoutes.get('/signup', (req, res, next) => {
@@ -79,6 +79,8 @@ adminRoutes.get('/createinvoice', ensure.ensureLoggedIn(), (req, res, next) => {
   res.render('admin/createinvoice.ejs',{
     userInfo:               userInfo
   });
+  //testing
+  debugger;
   console.log(req.user);
 });
 
